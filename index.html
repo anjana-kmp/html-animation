@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html-Animation</title>
+    <style>
+        body {
+            position: absolute;
+            height: 90%;
+            width: 90%;
+            display: flex;
+            padding: 20px;
+
+
+        }
+
+        .ball {
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            background: radial-gradient(white 5%, pink 25%, red);
+
+        }
+
+        button {
+            position: relative;
+            align-self: flex-end;
+            text-transform: capitalize;
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ball"></div>
+    <button onclick="animateEl(event)">Animate position
+    </button>
+    <button onclick="animateColor(event)">Animate color</button>
+    <script>
+        function animateEl(event) {
+
+            // event.target.setAttribute('disabled',true)
+            let animEl = document.querySelector('.ball')
+            let positionX = (Math.random() * 500) + 'px'
+            let positionY = (Math.random() * 300) + 'px'
+
+            animEl.animate([
+                { marginLeft: positionX, marginTop: positionY }
+            ],
+                { duration: 3000, easing: 'ease-in', fill: 'forwards' })
+            animEl.onanimationend = function () {
+                debugger
+                event.target.removeAttribute('disabled')
+
+            }
+        }
+        // animEl.addEventListener('webkitAnimationEnd',function(){
+        //     debugger
+        //     event.target.removeAttribute('disabled')
+
+        // })
+        function animateColor(event) {
+            let animEl = document.querySelector('.ball')
+            let arrayColors=['green','indigo','violet','blue','orange','yellow','red','white']
+            let r = 'white 5%'
+            let g = arrayColors[Math.floor(Math.random() * arrayColors.length)]+' 25%'
+            let b = arrayColors[Math.floor(Math.random() * arrayColors.length)]
+
+
+            animEl.animate([
+                { background: `radial-gradient(${r},${g},${b})` }
+
+            ], { duration: 3000, easing: 'ease-in', fill: 'forwards' })
+
+        }
+
+
+    </script>
+</body>
+
+</html>
